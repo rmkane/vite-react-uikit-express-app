@@ -35,3 +35,20 @@ $inverse-button-secondary-active-color: $button-secondary-active-color;
 
 // 4. Import UIkit
 @import "../../node_modules/uikit/src/scss/uikit.scss";
+
+// 5. Additional overrides
+/* Overrides for react-loading-overlay-ts */
+/* Undo: Add margin if adjacent element */
+/* Since the loading overlay places a div before lists */
+._loading_overlay_wrapper > ._loading_overlay_overlay {
+  + p,
+  + ul,
+  + ol,
+  + dl,
+  + pre,
+  + address,
+  + fieldset,
+  + figure {
+    margin-top: 0;
+  }
+}
