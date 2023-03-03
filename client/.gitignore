@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Exclude copiled UIKit theme CSS
+src/theme/site.css
