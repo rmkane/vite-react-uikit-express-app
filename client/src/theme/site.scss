@@ -52,3 +52,14 @@ $inverse-button-secondary-active-color: $button-secondary-active-color;
     margin-top: 0;
   }
 }
+
+/* Application header icon */
+.uk-navbar-container .uk-logo .uk-icon {
+  width: 40px;
+  svg {
+    transform: scale(2);
+    polygon, circle {
+      stroke-width: 2px;
+    }
+  }
+}

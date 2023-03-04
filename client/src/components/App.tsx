@@ -4,8 +4,6 @@ import UIkit from 'uikit';
 import Icons from 'uikit/dist/js/uikit-icons';
 import { Footer, Header, Main } from './layout';
 
-import './App.css';
-
 function App() {
   useEffect(() => {
     UIkit.use(Icons);
