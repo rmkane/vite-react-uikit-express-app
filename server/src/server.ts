@@ -47,6 +47,20 @@ app.use(express.urlencoded({ extended: true }));
 app.use(multer().array('file', 10));
 app.use(express.static('public'));
 
+// Create reusable transporter object using the default SMTP transport
+const getDefaultMailOptions = async (): Promise<SMTPTransport.Options> => {
+  const testAccount = await nodemailer.createTestAccount();
+  return {
+    host: 'smtp.ethereal.email',
+    port: 587,
+    secure: false, // true for 465, false for other ports
+    auth: {
+      user: testAccount.user, // generated ethereal user
+      pass: testAccount.pass, // generated ethereal password
+    },
+  };
+};
+
 const mailOptions: SMTPTransport.Options = {
   host: process.env.SMTP_HOST ?? '',
   port: parseIntOrDefault(process.env.SMTP_PORT, 0),
@@ -78,12 +92,16 @@ app.get('/notifications', (_req: Request, res: Response) => {
 
 app.post('/email', (req: Request, res: Response) => {
   (async () => {
-    // const testAccount = await nodemailer.createTestAccount();
     const formData: ContactFormData = ContactFormData.parse(req.body);
 
-    const transporter = nodemailer.createTransport(mailOptions);
+    let options: SMTPTransport.Options = mailOptions;
+    if (!options.host) {
+      options = await getDefaultMailOptions();
+    }
+
+    const transporter = nodemailer.createTransport(options);
     const info = await transporter.sendMail({
-      from: `"${formData.name}" <${mailOptions.auth?.user}>`,
+      from: `"${formData.name}" <${options.auth?.user}>`,
       to: 'rmkane89@gmail.com',
       subject: formData.subject,
       text: formData.message,
