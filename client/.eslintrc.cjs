@@ -23,13 +23,21 @@ module.exports = {
     sourceType: 'module',
     project: './tsconfig.json',
   },
-  plugins: ['@typescript-eslint', 'prettier'],
+  plugins: ['@typescript-eslint', 'prettier', 'simple-import-sort'],
   rules: {
     '@typescript-eslint/no-non-null-assertion': ['off'],
     'prettier/prettier': ['error', { singleQuote: true }],
-    "jsx-a11y/label-has-associated-control": "off",
-    "jsx-a11y/label-has-for": "off",
-    "react/require-default-props": "off",
+    'jsx-a11y/label-has-associated-control': 'off',
+    'jsx-a11y/label-has-for': 'off',
+    'react/require-default-props': 'off',
+    'simple-import-sort/imports': ['error', {
+      groups: [
+        ['^react'],
+        ['^@?\\w'],
+        ['@/(.*)'],
+        ['^[./]'],
+      ]
+    }]
   },
   globals: {
     module: true,

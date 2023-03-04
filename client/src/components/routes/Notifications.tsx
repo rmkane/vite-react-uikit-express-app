@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import NotificationList from '../common/NotificationList';
+
 import { Notification } from '../common/NotificationItem';
+import NotificationList from '../common/NotificationList';
 
 function Notifications() {
   const [notifications, setNotifications] = useState<Notification[]>();

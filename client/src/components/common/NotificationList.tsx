@@ -1,4 +1,5 @@
 import React from 'react';
+
 import LoadingMask from './LoadingMask';
 import NotificationItem, { Notification } from './NotificationItem';
 

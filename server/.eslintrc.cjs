@@ -19,10 +19,17 @@ module.exports = {
     sourceType: 'module',
     project: './tsconfig.json',
   },
-  plugins: ['@typescript-eslint', 'prettier'],
+  plugins: ['@typescript-eslint', 'prettier', 'simple-import-sort'],
   rules: {
     '@typescript-eslint/no-non-null-assertion': ['off'],
     'prettier/prettier': ['error', { singleQuote: true }],
+    'simple-import-sort/imports': ['error', {
+      groups: [
+        ['^@?\\w'],
+        ['@/(.*)'],
+        ['^[./]']
+      ]
+    }]
   },
   globals: {
     module: true,

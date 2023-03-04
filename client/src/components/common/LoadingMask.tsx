@@ -1,15 +1,15 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, ReactNode } from 'react';
 import LoadingOverlayWrapper from 'react-loading-overlay-ts';
 
 export type LoadingMaskProps = {
   active?: boolean;
   children: ReactElement;
-  spinner?: boolean;
-  text?: string;
+  spinner?: boolean | ReactNode;
+  text?: ReactNode;
 };
 
 function LoadingMask(props: LoadingMaskProps): JSX.Element {
-  const { active = false, children, spinner = false, text = '' } = props;
+  const { active, children, spinner, text } = props;
   return (
     <LoadingOverlayWrapper
       active={active}
