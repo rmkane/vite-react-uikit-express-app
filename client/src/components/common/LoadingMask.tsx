@@ -1,5 +1,5 @@
-import { ReactElement } from "react";
-import LoadingOverlayWrapper from "react-loading-overlay-ts";
+import React, { ReactElement } from 'react';
+import LoadingOverlayWrapper from 'react-loading-overlay-ts';
 
 export type LoadingMaskProps = {
   active?: boolean;
@@ -8,27 +8,27 @@ export type LoadingMaskProps = {
   text?: string;
 };
 
-function LoadingMask(props: LoadingMaskProps) {
-  const { active, children, spinner, text } = props;
+function LoadingMask(props: LoadingMaskProps): JSX.Element {
+  const { active = false, children, spinner = false, text = '' } = props;
   return (
     <LoadingOverlayWrapper
       active={active}
       spinner={spinner}
-      text={text ?? "Loading..."}
+      text={text ?? 'Loading...'}
       styles={{
         content: (base) => ({
           ...base,
-          color: "hsla(210, 87%, 53%, 1.0)",
+          color: 'hsla(210, 87%, 53%, 1.0)',
         }),
         overlay: (base) => ({
           ...base,
-          background: "hsla(210, 87%, 53%, 0.33)",
+          background: 'hsla(210, 87%, 53%, 0.33)',
         }),
         spinner: (base) => ({
           ...base,
-          width: "100px",
-          "& svg circle": {
-            stroke: "hsla(210, 87%, 53%, 1.0)",
+          width: '100px',
+          '& svg circle': {
+            stroke: 'hsla(210, 87%, 53%, 1.0)',
           },
         }),
       }}

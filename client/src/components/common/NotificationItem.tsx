@@ -1,3 +1,5 @@
+import React from 'react';
+
 export type Notification = {
   content: string;
   dateCreated: number;
@@ -5,9 +7,9 @@ export type Notification = {
 
 export type NotificationItemProps = Notification;
 
-const dateFormatter: Intl.DateTimeFormat = Intl.DateTimeFormat("en-US", {
-  dateStyle: "full",
-  timeStyle: "long",
+const dateFormatter: Intl.DateTimeFormat = Intl.DateTimeFormat('en-US', {
+  dateStyle: 'full',
+  timeStyle: 'long',
 });
 
 function NotificationItem(props: NotificationItemProps) {

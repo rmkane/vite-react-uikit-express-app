@@ -1,5 +1,6 @@
-import { Route, Routes } from "react-router-dom";
-import { Contact, Home, Notifications, Time } from "../routes";
+import React from 'react';
+import { Route, Routes } from 'react-router-dom';
+import { Contact, Home, Notifications, Time } from '../routes';
 
 function Main() {
   return (

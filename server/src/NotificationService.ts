@@ -12,7 +12,7 @@ class NotificationService {
 
   addNotification(content: string): Notification {
     const notification: Notification = {
-      content: content,
+      content,
       dateCreated: Date.now(),
     };
     this.notifications.push(notification);

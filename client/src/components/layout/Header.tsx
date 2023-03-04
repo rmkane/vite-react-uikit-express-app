@@ -1,9 +1,10 @@
-import { ActiveLink } from "../common";
+import React from 'react';
+import { ActiveLink } from '../common';
 
 function Header() {
   return (
     <header className="uk-flex uk-navbar-container">
-      <nav className="uk-navbar uk-flex-1" role="menubar">
+      <nav className="uk-navbar uk-flex-1">
         <div className="uk-navbar-left uk-flex">
           <a
             className="uk-navbar-item uk-logo"

@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import React, { useCallback } from 'react';
 
 function Contact() {
   const onSubmit = useCallback((e: React.FormEvent<HTMLFormElement>) => {
@@ -6,17 +6,20 @@ function Contact() {
     const form: HTMLFormElement = e.target as HTMLFormElement;
     const formData: FormData = new FormData(form);
 
-    fetch("http://localhost:8000/email", {
-      method: "POST",
-      mode: "cors",
+    fetch('http://localhost:8000/email', {
+      method: 'POST',
+      mode: 'cors',
       headers: {
-        Connection: "keep-alive",
-        Accept: "*",
+        Connection: 'keep-alive',
+        Accept: '*',
       },
       body: formData,
     })
       .then((res) => res.json())
-      .then((json) => console.log(json));
+      .then((json) => {
+        /* eslint-disable-next-line no-console */
+        console.log(json);
+      });
   }, []);
 
   return (
@@ -80,10 +83,11 @@ function Contact() {
               className="uk-textarea"
               name="message"
               rows={8}
-            ></textarea>
+            />
           </div>
         </div>
         <div className="uk-flex uk-flex-right tm-gap-medium">
+          {/* eslint-disable-next-line react/button-has-type */}
           <button className="uk-button uk-button-danger" type="reset">
             Reset
           </button>

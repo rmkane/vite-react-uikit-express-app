@@ -1,5 +1,6 @@
-import LoadingMask from "./LoadingMask";
-import NotificationItem, { Notification } from "./NotificationItem";
+import React from 'react';
+import LoadingMask from './LoadingMask';
+import NotificationItem, { Notification } from './NotificationItem';
 
 export type NotificationListProps = {
   notifications: Notification[] | undefined;
