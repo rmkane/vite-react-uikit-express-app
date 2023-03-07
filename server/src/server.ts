@@ -1,6 +1,7 @@
 import cors from 'cors';
 import dotenv from 'dotenv';
 import express, { Express, Request, Response } from 'express';
+import session from 'express-session';
 import multer from 'multer';
 import nodemailer from 'nodemailer';
 import SMTPTransport from 'nodemailer/lib/smtp-transport';
@@ -15,16 +16,20 @@ dotenv.config();
 const db = new sqlite3.Database('./auth.db');
 
 db.serialize(() => {
-  db.run('DROP TABLE IF EXISTS login');
-  db.run(`CREATE TABLE login(
+  // db.run('DROP TABLE IF EXISTS login');
+  db.run(`CREATE TABLE IF NOT EXISTS login(
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
     username NVARCHAR(50) NOT NULL,
     password NVARCHAR(255) NOT NULL,
     email NVARCHAR(100) NOT NULL
   )`);
-  db.run(
-    "INSERT INTO login (username, password, email) VALUES ('admin', 'pass', 'root@system.net')",
-  );
+  db.get("SELECT 1 FROM login where username = 'admin'", (error, row) => {
+    if (!row) {
+      db.run(
+        "INSERT INTO login (username, password, email) VALUES ('admin', 'pass', 'root@system.net')",
+      );
+    }
+  });
 });
 
 setTimeout(3000).then(() => {
@@ -56,6 +61,15 @@ const ContactFormData = z.object({
 });
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 type ContactFormData = z.infer<typeof ContactFormData>;
+
+// https://codeshack.io/basic-login-system-nodejs-express-mysql/
+app.use(
+  session({
+    secret: 'secret',
+    resave: true,
+    saveUninitialized: true,
+  }),
+);
 
 app.use(cors());
 
