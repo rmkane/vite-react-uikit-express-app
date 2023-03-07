@@ -2,6 +2,22 @@
 
 This is an Express server written in TypeScript.
 
+## Config
+
+`.env` file
+
+```properties
+# Express
+PORT=8000
+
+# Email
+SMTP_HOST=<host>
+SMTP_PORT=<port>
+SMTP_SECURE=<true|false>
+SMTP_AUTH_USER=<email>
+SMTP_AUTH_PASS=<password>
+```
+
 ## Run
 
 The server can be started with the following comamnd:
@@ -35,3 +51,4 @@ fetch("http://localhost:8000/addNotification", {
   .then((res) => res.json())
   .then((json) => console.log(json));
 ```
+

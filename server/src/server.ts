@@ -4,12 +4,34 @@ import express, { Express, Request, Response } from 'express';
 import multer from 'multer';
 import nodemailer from 'nodemailer';
 import SMTPTransport from 'nodemailer/lib/smtp-transport';
+import sqlite3 from 'sqlite3';
 import { setTimeout } from 'timers/promises';
 import { z } from 'zod';
 
 import NotificationService, { Notification } from './NotificationService.js';
 
 dotenv.config();
+
+const db = new sqlite3.Database('./auth.db');
+
+db.serialize(() => {
+  db.run('DROP TABLE IF EXISTS login');
+  db.run(`CREATE TABLE login(
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    username NVARCHAR(50) NOT NULL,
+    password NVARCHAR(255) NOT NULL,
+    email NVARCHAR(100) NOT NULL
+  )`);
+  db.run(
+    "INSERT INTO login (username, password, email) VALUES ('admin', 'pass', 'root@system.net')",
+  );
+});
+
+setTimeout(3000).then(() => {
+  db.get('SELECT username, email FROM login', (error, row) => {
+    console.log(`${row.username} ${row.email}`);
+  });
+});
 
 const parseIntOrDefault = (
   value: string | undefined,
